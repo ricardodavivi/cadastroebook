@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="end" [routerLink]="['/categories']">
+      <ion-icon name="return-up-back-outline" ></ion-icon>
+    </ion-buttons>
+    <ion-title>{{title}}</ion-title> 
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form (ngSubmit)="onSubmit()" #form="ngForm">
+
+    <ion-item>
+      <ion-label position="stacked">Nome</ion-label>
+      <ion-input [(ngModel)]="categoryModel.name" name="name" #name="ngModel" required minlength="2"></ion-input>
+    </ion-item>
+    <app-validation-container [control]="name.control"></app-validation-container>
+
+    <ion-button type="submit" class="ion-margin-vertical" color="primary" expand="block" [disabled]="form.form.invalid">
+      Salvar
+    </ion-button>
+  </form>
+</ion-content>
+ 

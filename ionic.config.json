@@ -1,5 +1,7 @@
 {
   "name": "cadastroebook",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "angular"
 }

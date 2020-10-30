@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="end" [routerLink]="['/cardapio']">
+      <ion-icon name="return-up-back-outline" ></ion-icon>
+    </ion-buttons>
+    <ion-title>{{title}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form (ngSubmit)="onSubmit()" #form="ngForm">
+    <ion-item>
+      <ion-label position="stacked">Categoria</ion-label>
+      <ion-select placeholder="" [(ngModel)]="cardapioModel.category" name="category" #category="ngModel" required>
+        <ion-select-option *ngFor="let category of cartegories" [value]="category._id">{{category.name}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+    
+
+    <ion-item>
+      <ion-label position="stacked">Nome</ion-label>
+      <ion-input [(ngModel)]="cardapioModel.name" name="name" #name="ngModel" required minlength="2"></ion-input>
+    </ion-item>
+    
+    
+    
+    <!--<ion-item>
+      <ion-label position="stacked">Preço</ion-label>
+      <ion-input type="number" [(ngModel)]="cardapioModel.price" name="price" #price="ngModel" required
+        appMinValueValitation="1"></ion-input>
+    </ion-item>
+    <app-validation-container [control]="price.control"></app-validation-container> -->
+
+
+
+    <ion-item class="description">
+      <ion-label  position="stacked">Descrição</ion-label>
+      <ion-textarea class="text-wrap" [(ngModel)]="cardapioModel.description" name="description" #description="ngModel"></ion-textarea>
+    </ion-item>
+
+
+
+    <!-- Foto -->
+
+    <div class="ion-margin-vertical">
+      <input type="file" #fileInput (change)="addImageFromDesktop($event)" hidden="true" accept="application/*" />
+      <ion-card *ngIf="pdfUrl">
+        <img [src]="pdfUrl" />
+        <ion-card-content>
+          <ion-button color="danger" expand="block" fill="outline" (click)="onBtnRemoveImageClick()">
+            <ion-icon slot="start" name="trash"></ion-icon>
+            Remover foto
+          </ion-button>
+        </ion-card-content>
+      </ion-card>
+
+      <div class="ion-text-center" *ngIf=!pdfUrl >
+        <ion-button expand="block" color="medium" size="large" (click)="onBtnAddImageClick()">
+          <ion-icon slot="start" name="image-outline"></ion-icon>
+          Adicionar uma arquivo
+        </ion-button>
+      </div>
+    </div>
+
+    
+
+    <ion-button type="submit" class="ion-margin-vertical" color="primary" expand="block" [disabled]="form.form.invalid">
+      Salvar
+    </ion-button>
+  </form>
+</ion-content>
